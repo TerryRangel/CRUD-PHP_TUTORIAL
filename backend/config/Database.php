@@ -1,23 +1,28 @@
 <?php
-namespace Backend\Config;
+    namespace Backend\Config;
 
-class Database {
-    private $host = "localhost:8889";
-    private $db_name = "proyecto_php";
-    private $username = "root";
-    private $password = "root";
-    private $conn;
+    class Database 
+    {
+        private $host = "localhost:8889";
+        private $db_name = "proyecto_php";
+        private $username = "root";
+        private $password = "root";
+        private $conn;
 
-    public function connect() {
-        $this->conn = null;
+        public function connect() 
+        {
+            $this->conn = null;
 
-        try {
-            $this->conn = new \PDO("mysql:host={$this->host};dbname={$this->db_name}", $this->username, $this->password);
-            $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $ex) {
-            echo "Error de conexion: " . $ex->getMessage();
+            try 
+            {
+                $this->conn = new \PDO("mysql:host={$this->host};dbname={$this->db_name}", $this->username, $this->password);
+                $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } 
+            catch (\PDOException $ex) 
+            {
+                echo "Error de conexion: " . $ex->getMessage();
+            }
+            
+            return $this->conn;
         }
-
-        return $this->conn;
     }
-}
