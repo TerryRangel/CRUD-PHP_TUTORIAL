@@ -60,6 +60,40 @@
     </div>
   </div>
 </div>
+<!--modal editar usuarios-->
+
+<div id="editarModal" class="modal fade" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarModalLabel">Editar Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editarUsuarioForm">
+          <input type="text" name="nombre" id="editarnombre" required placeholder="Nombre" class="form-control mb-2">
+          <input type="text" name="apaterno" id="editarapaterno" required placeholder="A Paterno" class="form-control mb-2">
+          <input type="text" name="amaterno" id="editaramaterno" required placeholder="A Materno" class="form-control mb-2">
+          <input type="text" name="direccion" id="editardireccion" required placeholder="Direccion" class="form-control mb-2">
+          <input type="text" name="telefono" id="editartelefono" required placeholder="Telefono" class="form-control mb-2">
+          <input type="text" name="ciudad" id="editarciudad" required placeholder="Ciudad" class="form-control mb-2">
+          <input type="text" name="estado" id="editarestado" required placeholder="Estado" class="form-control mb-2">
+          <input type="text" name="usuario" id="editarusuario" required placeholder="Usuario" class="form-control mb-2">
+          <input type="password" name="password" id="editarpassword" required placeholder="Password" class="form-control mb-2">
+          <select id="editarrol" name="rol" class="form-control mb-2" required>
+            <option value="admin" selected>Admin</option>
+            <option value="conta" selected>Contabilidad</option>
+            <option value="rh" selected>Recursos</option>
+            <option value="sistemas" selected>Sistemas</option>
+            </select>
+            <button type="submit" class="btn btn-success w-100 mb-2">
+            Editar Usuario
+            </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="contenedorAlertas" class="position-fixed top-0 start-50 translate-middle-x mt-3 w-75">
 </div>

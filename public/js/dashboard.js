@@ -6,6 +6,7 @@ if (!usuario) {
 
 const tabla = document.getElementById('tablaUsuarios')
 const crearForm= document.getElementById('crearUsuarioForm')
+const editarForm = document.getElementById('editarUsuarioForm')
 
 const cargaUsuarios = async () => {
     try {
@@ -20,7 +21,7 @@ const cargaUsuarios = async () => {
             <td>${item.nombre} ${item.apaterno} ${item.amaterno}</td>
             <td>${item.rol}</td>
             <td>
-            <button class="btn btn-warning btn-sm" onclick="abrirEditar(${item})">
+            <button class="btn btn-warning btn-sm" onclick="abrirEditar({id: ${item.id}, usuario: '${item.usuario}', nombre: '${item.nombre}', apaterno: '${item.apaterno}', amaterno: '${item.amaterno}', direccion: '${item.direccion}', telefono: '${item.telefono}', ciudad: '${item.ciudad}', estado: '${item.estado}', rol: '${item.rol}'})">
             Editar
             </button>
             |
@@ -81,5 +82,55 @@ crearForm.addEventListener('submit', async (event) => {
         mostrarAlerta(error, 'error')
     }
 })
+
+const abrirEditar = (usuario) => {
+
+    console.log('@@@ usuario  actualizado=> ', usuario)
+    document.getElementById('editarnombre').value = usuario.nombre
+    document.getElementById('editarapaterno').value = usuario.apaterno
+    document.getElementById('editaramaterno').value = usuario.amaterno
+    document.getElementById('editardireccion').value = usuario.direccion
+    document.getElementById('editartelefono').value = usuario.telefono
+    document.getElementById('editarciudad').value = usuario.ciudad
+    document.getElementById('editarestado').value = usuario.estado
+    document.getElementById('editarusuario').value = usuario.usuario
+    document.getElementById('editarpassword').value = ''
+    document.getElementById('editarrol').value = usuario.rol
+
+    const modalEdita = new bootstrap.Modal(document.getElementById('editarModal'))
+    modalEdita.show()
+}
+
+
+editarForm.onsubmit = async (event) => {
+    event.preventDefault()
+
+const formData = new FormData(editarForm)
+const dataObj = Object.fromEntries(formData.entries())
+
+try {
+
+    console.log('Datos enviados:', dataObj);
+    const response = await fetch(`http://localhost:8888/crud-php_tutorial/backend/index.php/usuario/${dataObj.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataObj)
+    })
+
+    const result = await response.json()
+
+    mostrarAlerta('Usuario Actualizado Exitosamente', 'success')
+    editarForm.reset()
+    cargaUsuarios()
+    bootstrap.Modal.getInstance(document.getElementById('editarModal')).hide()
+} catch (error) {
+    mostrarAlerta(error, 'error')
+}
+
+}
+
+
 
 cargaUsuarios()

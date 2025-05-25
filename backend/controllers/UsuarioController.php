@@ -117,40 +117,41 @@ class UsuarioController {
     }
 
     public function update($id, $data) {
-        try {
-            if (is_array($data)) {
-                $data = (object) $data;
-            }
-
-            $usuario = new Usuario(
-                $id,
-                $data->nombre,
-                $data->apaterno,
-                $data->amaterno,
-                $data->direccion,
-                $data->telefono,
-                $data->ciudad,
-                $data->estado,
-                $data->usuario,
-                $data->password,
-                $data->rol
-            );
-
-            $respuesta = $this->service->update($usuario);
-            
-            echo json_encode([
-                'message' => $respuesta ? 'success' : 'error',
-                'data' => $respuesta ? 'Usuario actualizado exitosamente' : null,
-                'error' => $respuesta ? null : 'No se pudo actualizar el usuario'
-            ]);
-        } catch (Exception $e) {
-            echo json_encode([
-                'message' => 'error',
-                'error' => $e->getMessage()
-            ]);
+    try {
+        if (is_array($data)) {
+            $data = (object) $data;
         }
-       
+
+        $usuario = new Usuario(
+            $id,
+            $data->nombre,
+            $data->apaterno,
+            $data->amaterno,
+            $data->direccion,
+            $data->telefono,
+            $data->ciudad,
+            $data->estado,
+            $data->usuario,
+            $data->password,
+            $data->rol
+        );
+
+        $respuesta = $this->service->update($usuario);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'message' => $respuesta ? 'success' : 'error',
+            'data' => $respuesta ? 'Usuario actualizado exitosamente' : null,
+            'error' => $respuesta ? null : 'No se pudo actualizar el usuario'
+        ]);
+    } catch (Exception $e) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'message' => 'error',
+            'error' => $e->getMessage()
+        ]);
     }
+}
 
 
      public function delete($id) {

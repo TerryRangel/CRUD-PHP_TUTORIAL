@@ -102,6 +102,7 @@ class UsuarioRepository {
     $query_execute->bindParam(':usuario', $usuario->usuario);
     $query_execute->bindParam(':password', $usuario->password);
     $query_execute->bindParam(':rol', $usuario->rol);
+    $query_execute->bindParam(':id', $usuario->id);
 
     return $query_execute->execute();
 
