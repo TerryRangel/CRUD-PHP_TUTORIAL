@@ -22,12 +22,12 @@ $basePath = '/crud-php_tutorial/backend/index.php';
 $route = str_replace($basePath, '', $uri);
 
 if ($method === 'POST' && $route === '/login') {
-    $data = json_encode(file_get_contents('php://input'), true);
+    $data = json_decode(file_get_contents('php://input'), true);
     $usuarioController->login($data);
 }
 
 if ($method === 'POST' && $route === '/create') {
-    $data = json_encode(file_get_contents('php://input'), true);
+    $data = json_decode(file_get_contents('php://input'), true);
     $usuarioController->create($data);
 }
 
@@ -41,7 +41,7 @@ if ($method === 'GET' && preg_match('#^/usuario/(\d+)$#', $route, $matches)) {
 
 if ($method === 'PUT' && preg_match('#^/usuario/(\d+)$#', $route, $matches)) {
     $id = $matches[1];
-    $data = json_encode(file_get_contents('php://input'), true);
+    $data = json_decode(file_get_contents('php://input'), true);
     $usuarioController->update($id, $data);
 }
 if ($method === 'DELETE' && preg_match('#^/usuario/(\d+)$#', $route, $matches)) {

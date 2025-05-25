@@ -13,7 +13,7 @@ class UsuarioRepository {
     }
 
     public function create(Usuario $usuario) {
-        $sql = "INSERT INTO usuario (nombre, apaterno, amaterno, direccion, telefono, ciudad, estado, usuario, password, rol)
+        $sql = "INSERT INTO usuarios (nombre, apaterno, amaterno, direccion, telefono, ciudad, estado, usuario, password, rol)
                 VALUES (:nombre, :apaterno, :amaterno, :direccion, :telefono, :ciudad, :estado, :usuario, :password, :rol)";
 
         
