@@ -61,7 +61,7 @@ class UsuarioController {
             $data->estado,
             $data->usuario,
             $data->password,
-            $data->rol,
+            $data->rol
         );
 
         $respuesta = $this->service->create($usuario);   
