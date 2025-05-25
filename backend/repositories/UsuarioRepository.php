@@ -34,11 +34,11 @@ class UsuarioRepository {
 
     }
 
-    public function getAll() {
+ public function getAll() {
     $sql = "SELECT * FROM usuarios";
     $query_execute = $this->conn->prepare($sql);
     $query_execute->execute();
-    return $query_execute->fetch(PDO::FETCH_ASSOC);
+    return $query_execute->fetchAll(PDO::FETCH_ASSOC); // ← aquí el cambio
 }
 
     public function getById($id) {
