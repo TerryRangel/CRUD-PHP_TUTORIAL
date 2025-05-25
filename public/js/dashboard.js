@@ -5,6 +5,7 @@ if (!usuario) {
 }
 
 const tabla = document.getElementById('tablaUsuarios')
+const crearForm= document.getElementById('crearUsuarioForm')
 
 const cargaUsuarios = async () => {
     try {
@@ -35,5 +36,50 @@ const cargaUsuarios = async () => {
         mostrarAlerta(error, 'error')
     }
 }
+
+const eliminarUsuario = async id => {
+    const confirmation = confirm('¿Estas seguro?')
+    if (confirmation) {
+        try {
+            const response = await fetch(`http://localhost:8888/crud-php_tutorial/backend/index.php/usuario/${id}`, {
+                method: 'DELETE'
+            })
+            const result = await response.json()
+            mostrarAlerta(result.message || 'Usuario Eliminado', 'success')
+            cargaUsuarios()
+        } catch (error) {
+            mostrarAlerta(error, 'error')
+        }
+    }
+}
+
+crearForm.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    const formData = new FormData(crearForm)
+    const dataObj = Object.fromEntries(formData.entries())
+
+    try {
+        const response = await fetch('http://localhost:8888/crud-php_tutorial/backend/index.php/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataObj)
+        })
+
+        const result = await response.json()
+
+        if (result.message === 'success' && result.data === 'Usuario creado exitosamente') {
+            mostrarAlerta('Usuario creado exitosamente', 'success')
+            crearForm.reset()
+            bootstrap.Modal.getInstance(document.getElementById('crearModal')).hide()
+            cargaUsuarios()
+        } else {
+            mostrarAlerta(result.message || 'Error al crear el usuario', 'error')
+        }
+    } catch (error) {
+        mostrarAlerta(error, 'error')
+    }
+})
 
 cargaUsuarios()

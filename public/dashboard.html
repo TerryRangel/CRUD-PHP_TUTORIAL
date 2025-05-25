@@ -10,7 +10,7 @@
 
   <body>
 
-<body>
+
   <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>Gestion de Usuarios</h2>
@@ -28,11 +28,38 @@
       <tbody id="tablaUsuarios"></tbody>
     </table>
   </div>
-</body>
 
-
-
-
+<!--modal crear usuarios-->
+<div id="crearModal" class="modal fade" tabindex="-1" aria-labelledby="crearModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearModalLabel">Crear Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="crearUsuarioForm">
+            <input type="text" name="nombre" id="nombre" required placeholder="Nombre" class="form-control mb-2">
+            <input type="text" name="apaterno" id="apaterno" required placeholder="A Paterno" class="form-control mb-2">
+            <input type="text" name="amaterno" id="amaterno" required placeholder="A Materno" class="form-control mb-2">
+            <input type="text" name="direccion" id="direccion" required placeholder="Direccion" class="form-control mb-2">
+            <input type="text" name="telefono" id="telefono" required placeholder="Telefono" class="form-control mb-2">
+            <input type="text" name="ciudad" id="ciudad" required placeholder="Ciudad" class="form-control mb-2">
+            <input type="text" name="estado" id="estado" required placeholder="Estado" class="form-control mb-2">
+            <input type="text" name="usuario" id="usuario" required placeholder="Usuario" class="form-control mb-2">
+            <input type="password" name="password" id="password" required placeholder="Password" class="form-control mb-2">
+            <select id="rol" name="rol" class="form-control mb-2" required>
+            <option value="admin" selected>Admin</option>
+            <option value="conta">Contabilidad</option>
+            <option value="rh">Recursos</option>
+            <option value="sistemas" selected>Sistemas</option>
+            </select>
+            <button type="submit" class="btn btn-success w-100 mb-2">Crear Usuario</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="contenedorAlertas" class="position-fixed top-0 start-50 translate-middle-x mt-3 w-75">
 </div>
